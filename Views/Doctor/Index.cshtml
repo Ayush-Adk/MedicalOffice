@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MedicalOffice.Models.Doctor>
+
+<partial name="_ViewHeading" />
+
+<form asp-action="Index" method="get">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Summary)
+                </th>
+                <th class="d-none d-lg-table-cell">
+                    @Html.DisplayNameFor(model => model.DoctorSpecialties)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Summary)
+                    </td>
+                    <td class="d-none d-lg-table-cell">
+                        @{
+                            int specCount = item.DoctorSpecialties.Count;
+                            if (specCount > 0)
+                            {
+                                string firstSpec = item.DoctorSpecialties.FirstOrDefault().Specialty.SpecialtyName;
+                                if (specCount > 1)
+                                {
+                                    string specList = "";//Html string of specialty names separated by <br /> tags
+                                    var s = item.DoctorSpecialties.ToList();
+                                    for (int i = 1; i < specCount; i++)//Skip the first because we have it already
+                                    {
+                                        specList += s[i].Specialty.SpecialtyName + " <br />";
+                                    }
+                                    <a class="" role="button" data-bs-toggle="collapse" href="#collapseSpecalty@(item.ID)"
+                                       aria-expanded="false" aria-controls="collapseSpecalty@(item.ID)">
+                                        @firstSpec <span class="badge bg-info">@specCount</span>
+                                    </a>
+                                    <div class="collapse" id="collapseSpecalty@(item.ID)">
+                                        @Html.Raw(specList)
+                                    </div>
+                                }
+                                else
+                                {
+                                    @firstSpec
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_PagingNavBar" />
+</form>
+@section Scripts {
+    <script type="text/javascript">
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+}

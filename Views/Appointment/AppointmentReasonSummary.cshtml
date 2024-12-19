@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MedicalOffice.ViewModels.AppointmentReasonSummaryVM>
+
+@{
+    ViewData["Title"] = "Appointment Reason Summary";
+}
+
+<h2>Appointment Reason Summary</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Appointment_Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number_Of_Appointments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total_Extra_Fees)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Maximum_Fee_Charged)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appointment_Reason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number_Of_Appointments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total_Extra_Fees)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Maximum_Fee_Charged)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MedicalOffice.ViewModels.AppointmentSummaryVM>
+
+@{
+    ViewData["Title"] = "Appointment Summary";
+}
+
+<h1>Appointment Summary</h1>
+
+<a asp-action="AappointmentSummaryExport" class="btn btn-info float-end">Export to Excel</a>
+
+<form asp-controller="Appointment" asp-action="AppointmentSummary" method="get">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Summary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Number_Of_Appointments)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total_Extra_Fees)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Maximum_Fee_Charged)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Summary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Number_Of_Appointments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total_Extra_Fees)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Maximum_Fee_Charged)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_PagingNavBar" />
+</form>
+@section Scripts {
+    <script type="text/javascript">
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+}
