@@ -34,7 +34,7 @@ Welcome to **Medical Office Solution**, a powerful Medical Office Management Sys
 
 💻 **Clone the Repository & Get Started:**
 
-```bash
+ ```bash
 git clone https://github.com/your-username/medical-office-solution.git
 cd medical-office-solution
 dotnet run
